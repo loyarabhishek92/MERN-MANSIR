@@ -1,158 +1,97 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MERN DEMO</title>
+    <title>CSS</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
-        .nav {
-            height: 50px;
-            width: 100vw;
-            background-color: rgb(21, 91, 153);
-            position: sticky;
-            top: 0px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            padding-left: 10px;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap');
 
-        /* .link {
-            width: 100vw;
-            height: 100px;
-            display: flex;
-            justify-content: space-evenly;
-            background-color: aliceblue;
-        } */
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    padding: 10px;
+}
+/* this is child selector in css */
+.bx>h1{   
+    color: red;
+}
+li:nth-child(3){
+    color: red;
+}
+.bb:hover{
+    color: red;
+}
+.mm::before{
+    content: 'before';
+    color: red;
+    font-size: 20px;
+}
+.mm::after{
+    content: 'after';
+    color: red;
+    font-size: 20px;
+}
+input[type='text']{
+    background-color: red;
+}
+input[type='email']:focus{
+    color: red;
+}
+p,span,h5{
+    color: red;
+}
+.tt{
+    /* text-decoration: underline 3px red;
+    text-underline-offset: 5px; */
+    /* text-align: left; */
+    /* text-shadow: 25px 10px 8px red; */
+    /* color: #89986D; */
+    /* color: rgb(200, 200, 100); */
+    /* color: rgba(150, 150, 100, 0.5); */
+     font-family: "BBH Bartle", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 
-        .nav a {
-            color: white;
-            font-size: 1rem;
-            /* text-decoration: none; */
-        }
-
-        .parent-bx {
-            height: 200px;
-            width: 75vw;
-            background-color: red;
-        }
-
-        .c-bx {
-            height: 100px;
-            width: 50%;
-            background-color: black;
-        }
-
-        .forimag {
-            height: 100px;
-            width: 200px;
-            background-color: yellowgreen;
-            padding: 20px;
-            margin: 10px;
-            transition: all 1s ease-in-out 0s;
-        }
-
-        .forimag:hover {
-            /* height: 300px; */
-            /* width: 400px; */
-            /* background-color: red; */
-            rotate: 360deg;
-        }
+}
     </style>
 </head>
-
 <body>
-    <h1>MERN-STACK</h1>
-    <div class="nav">
-        <a href="contact.html">contact </a>
-        <a href="table.html">Table</a>
-        <a href="table1.html">Table1</a>
-        <a href="boxmodel.html">Box-Model</a>
-        <a href="boxmodel1.html">Box-Model-1</a>
-        <a href="card.html">card</a>
-        <a href="card1.html">bg-image with text</a>
-        <a href="flex-box.html">Flex-Box-card</a>
-        <a href="flex-box1.html">Flex-Box1</a>
-        <a href="project/project01.html">project</a>
-        <a href="Grid/grid_01.html">Grid</a>
-    </div>
-
-    <H1>I am heading 1</H1>
-    <H2>I am heading 2</H2>
-    <h3>i am heading 3</h3>
-    <h4>i am heading 4</h4>
-    <h5>i am heading 5</h5>
-    <h6>i am heading 6</h6>
-    <br>
-
-
-    <hr>
-    <p>Lorem ipsum &nbsp dolor sit amet consectetur adipisicing elit. Saepe quod in, nemo a eius quos expedita nisi
-        maiores inventore error suscipit commodi, earum officia molestiae corrupti iure eos at pariatur.
-        Velit voluptas laborum aliquam mollitia cum! Praesentium a voluptatum nam illo animi debitis eum, inventore,
-        velit magnam obcaecati recusandae. Rem odit, autem qui soluta doloremque saepe officiis placeat laudantium est.
-        Corporis nam quo eius est assumenda fugit totam, architecto tempore quas ex. Ratione laudantium dolore inventore
-        enim architecto reiciendis, mollitia esse accusamus aliquid cumque porro nobis nesciunt velit minima in.
-        Autem suscipit eum minima libero, at, possimus nobis et quod, esse culpa distinctio. Eligendi perspiciatis
-        debitis recusandae sunt iste adipisci ex dolores eveniet blanditiis, beatae esse natus tenetur autem nulla.
-        Pariatur dolorem labore odio architecto. Perferendis tenetur corrupti fugiat nostrum itaque, reiciendis amet quo
-        iusto at nihil voluptatem debitis maiores ex quaerat autem dolores, quod libero inventore. Voluptatum, voluptas
-        illum.
-        Cupiditate animi quo adipisci quam dolorem, vero odio quasi. Beatae aperiam, consequuntur non saepe fugit animi
-        facilis deserunt similique reprehenderit eius, rerum veritatis assumenda libero cumque consectetur! Eum, aliquid
-        debitis!
-        Cupiditate commodi iste aspernatur perspiciatis obcaecati fuga reprehenderit velit magni minus dolorum amet,
-        odit ea voluptate quibusdam placeat impedit. Tempore quidem minus amet dolore, veniam velit? Quisquam optio
-        sapiente ipsam.
-        Rem quidem quasi corrupti tempora quibusdam non. Non est laboriosam eius quidem dicta dolorem cumque dignissimos
-        quasi aut hic in at quas quis cum, molestias fugiat eos? Maxime, aperiam blanditiis.</p>
-
-    <strong>H<sup>2</sup>O</strong>
-    <pre>
-        hari 
-        rahul
-        sita
-    </pre>
-    <h1>example of order list</h1>
-    <h3>name of fruits</h3>
-    <ol type="i">
-        <li>apple</li>
-        <li>mango</li>
-        <li>orange</li>
-    </ol>
-    <h1>example of unorder list</h1>
-    <ul>
-        <li>apple</li>
-        <li>mango</li>
-        <li>orange</li>
-    </ul>
-    <img src="image/new2079.png" alt="LOADING" height="200px">
-
-    <hr>
-    <iframe src="table1.html" frameborder="0"></iframe>
-    <br>
-    <hr>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/9UNIK5wIKBU?si=cKNKs7ceUDxW0Ztz"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <br>
-    <hr>
-    <video src="https://www.youtube.com/embed/9UNIK5wIKBU?si=cKNKs7ceUDxW0Ztz" controls></video>
-    <br>
-    <hr>
-
-    <div class="parent-bx">
+    <div class="bx">
+        <h1>hello jee</h1>
+        <h1>sello jee</h1>
+        
         <div class="c-bx">
-
-        </div>
+        <h1>im child box</h1>
     </div>
-    <div class="forimag">
-
     </div>
+    <ol>
+        <li>apple</li>
+        <li>mango</li>
+        <li>orange</li>
+        <li>pineapple</li>
+    </ol>
+    <br>
+    <hr>
+    <h1 class="bb">hover</h1>
+    <p class="mm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <hr><br>
+    <input type="text" placeholder="username">
+    <input type="text" placeholder="detail">
+    <input type="email" placeholder="@gmail.com">
+    <br>
+    <br>
 
+    <p>hello</p>
+    <span>sello</span>
+    <h5>hello</h5>
+    <hr>
+    <div class="tt">
+        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores.</h4>
+    </div>
 </body>
-
 </html>
