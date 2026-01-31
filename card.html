@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <script src="https://kit.fontawesome.com/0de4f50d81.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .parent {
+            height: 340px;
+            width: 300px;
+            margin-left: 200px;
+            margin-top: 100px;
+            position: relative;
+            box-shadow: 0px 0px 15px 2px;
+        }
+
+        .icon {
+            height: 30px;
+            width: 30px;
+            background-color: rgb(17, 180, 161);
+            position: absolute;
+            top: 170px;
+            right: 10px;
+            clip-path: circle();
+        }
+
+        #icon1 {
+            color: whitesmoke;
+            position: absolute;
+            top: 8px;
+            left: 7px;
+        }
+
+        .box1 {
+            height: 180px;
+            width: 300px;
+            background-image: url(image/merry.jpg);
+            background-size: cover;
+
+        }
+
+        .box2 {
+            height: 160px;
+            width: 300px;
+        }
+
+        .box-child {
+            margin-left: 15px;
+            width: 285px;
+            height: 120px;
+        }
+
+        .child1 {
+            margin: 5px 0px 5px 0px;
+            opacity: 0.5;
+        }
+
+        .child2 {
+            margin: 5px 0px 5px 0px;
+            color: orange;
+        }
+
+        .child3 {
+            font-style: oblique;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #aa {
+            margin-left: 50px;
+        }
+
+        .btn {
+            width: 300px;
+            height: 30px;
+            background-color: red;
+            border: none;
+            position: absolute;
+            bottom: 0px;
+            cursor: pointer;
+
+        }
+
+        .box-child h2 {
+            text-transform: uppercase;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="icon">
+            <i class="fa-regular fa-heart" id="icon1"></i>
+
+        </div>
+        <div class="box1">
+
+        </div>
+        <div class="box2">
+            <div class="box-child">
+                <h2>Merry christmas</h2>
+                <div class="child1">
+                    <span><i class="fa-regular fa-clock"></i>15 Mins</span>
+                    <span id="aa"><i class="fa-solid fa-users"></i>serves 2</span>
+                </div>
+                <div class="child2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="child3">
+                    <p>May every challenge turn into an opportunity, and every joy be multiplied.</p>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn">See More.</button>
+    </div>
+</body>
+
+</html>

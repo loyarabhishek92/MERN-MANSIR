@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 10px;
+            background-color: #282C35;
+        }
+
+        .gridbox {
+            width: 90%;
+            height: 500px;
+            /* padding: 100px 50px; */
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+
+        }
+
+
+
+        .item1 {
+            background-color: #61FFB4;
+            grid-row: span 2;
+            position: relative;
+        }
+        .c1{
+            padding: 20px;
+            position: absolute;
+            top: 100px;
+        }
+        .c1 h1{
+            font-size: 5rem;
+        }
+        .c1 h3{
+            margin-top: 15px;
+        }
+        .c1 p{
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #59BDA6;
+        }
+        .c1 a{
+           color: red;
+           font-weight: bolder;
+           padding-top: 100px;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        .item2 {
+            background: linear-gradient(#783A87, #C42C65);
+            grid-column: span 2;
+        }
+        .c2{
+            display: flex;
+            margin: 50px;
+            align-items: center;
+            gap: 30px;
+            /* border: 2px solid black; */
+        }
+        .c2 h1{
+            font-size: 5rem;
+            color: white;
+        }
+        .c2 h4{
+            text-align: center;
+            color: white;
+        }
+        .c2 p{
+            font-size: 1.5rem;
+            color: white;
+        }
+        .c2 a{
+            color: #F7C665;
+        }
+
+        .item3 {
+            background-color: #0AC5FA;
+        }
+        .c3{
+            text-align: center;
+            margin-top: 30px;
+        }
+        .c3 h1{
+            font-size: 5rem;
+            color: white;
+        }
+        .c3 h4{
+            color: white;
+            margin-top: 10px;
+        }
+        .c3 p{
+            color: white;
+            margin-top: 20px;
+        }
+
+        .item4 {
+            background-color: #FC7D42;
+        }
+        .c4{
+            text-align: center;
+            margin-top: 30px;
+        }
+        .c4 h1{
+            font-size: 5rem;
+            color: white;
+        }
+        .c4 h4{
+            color: white;
+            margin-top: 10px;
+        }
+        .c4 p{
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gridbox">
+        <div class="item item1">
+            <div class="c1">
+                <h1>33</h1>
+                <h3>WEB & APP TEMPLATES</h3>
+                <P>Including Dashboard, photography, E-Commerce, Landing, Blog and much more...</P>
+                <a href="">EXPLORE DEMO</a>
+            </div>
+        </div>
+        <div class="item item2">
+            <div class="c2">
+                <div class="flexbx1">
+                    <h1>228</h1>
+                    <h4>UI BLOCKS</h4>
+                </div>
+                <div class="flexbx2">
+                    <p>Blog/Business/Creative/Dashboard/Directory/Entertainment/E-Commerce</p>
+                    <a href="">VIEW ALL BLOCKS</a>
+                </div>
+            </div>
+        </div>
+        <div class="item item3">
+            <div class="c3">
+                <h1>105</h1>
+                <h4>INNER PAGES</h4>
+                <P>Including Blog, Portfolio, Shop and Content pages</P>
+            </div>
+        </div>
+        <div class="item item4">
+            <div class="c4">
+                <h1>1K+</h1>
+                <h4>UI ELEMENTS</h4>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

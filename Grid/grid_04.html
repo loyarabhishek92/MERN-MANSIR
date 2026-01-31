@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid4</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        body{
+            padding: 20px;
+        }
+
+        .grid-box{
+            max-width: 50%;
+            height: 500px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 0.3fr 1fr 1fr 0.3fr;
+            gap: 10px;
+        }
+        .item1{
+            background-color: #FD9900;
+            grid-column: span 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+
+        }
+        .item2{
+            background-color: #FE5E02;
+            grid-row: span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+
+        }
+        .item3{
+            background-color: rgb(248, 2, 2);
+            grid-column: span 2;
+             display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .item4{
+            background-color: rgb(193, 34, 242);
+             display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .item5{
+            background-color: rgb(193, 34, 242);
+             display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .item6{
+            background-color: #FD9900;
+            grid-column: span 3;
+             display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="grid-box">
+        <div class="item item1">header</div>
+        <div class="item item2">sidebar</div>
+        <div class="item item3">content1</div>
+        <div class="item item4">content2</div>
+        <div class="item item5">content3</div>
+        <div class="item item6">footer</div>
+    </div>
+</body>
+</html>

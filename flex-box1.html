@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-box1</title>
+    <style>
+        .container{
+            width: 70%;
+            display: flex;
+            /* justify-content: space-between; */
+            border: 2px solid black;
+            flex-wrap: wrap;
+        }
+
+        .box1{
+            flex-basis: 200px;
+        }
+        .bx1{
+            background-color: red;
+            /* flex-shrink: 2; */
+            flex-grow: 1;
+        }
+        .bx2{
+            background-color: yellow;
+        }
+        .bx3{
+            background-color: pink;
+        }
+        .bx4{
+            background-color: blue;
+        }
+        .bx5{
+            background-color: gray;
+        }
+        .bx6{
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1 bx1">box1</div>
+        <div class="box1 bx2">box2</div>
+        <div class="box1 bx3">box3</div>
+        <div class="box1 bx4">box4</div>
+        <div class="box1 bx5">box5</div>
+        <div class="box1 bx6">box6</div>
+    </div>
+</body>
+</html>
