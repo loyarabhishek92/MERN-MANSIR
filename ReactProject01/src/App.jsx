@@ -1,0 +1,11 @@
+import Card from "./components/Card";
+import Header from "./components/Header";
+
+export default function App() {
+  return (
+    <div>
+      <Card />
+
+    </div>
+  )
+}
