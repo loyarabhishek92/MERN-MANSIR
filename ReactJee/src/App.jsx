@@ -3,7 +3,9 @@ import { RouterProvider } from "react-router-dom"
 import Home from "./pages/home/Home"
 import NotFound from "./components/NotFound";
 import RootLayout from "./components/RootLayout";
-import AddForm from "./pages/form/add/Addform";
+import ItemList from "./pages/meals/ItemList";
+import Meal from "./pages/meals/Meal";
+
 
 
 export default function App() {
@@ -20,8 +22,12 @@ export default function App() {
           element: <Home />
         },
         {
-          path:'form/add',
-          element: <AddForm />
+          path: 'items-list/:label',
+          element: <ItemList />
+        },
+        {
+          path:'meal/:id',
+          element: <Meal />
         },
         {
           path: '*',

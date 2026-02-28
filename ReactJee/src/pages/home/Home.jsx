@@ -1,34 +1,46 @@
-import { Button } from "@/components/ui/button";
-import { useState } from "react"
-
+import { Input } from "@/components/ui/input";
+import MealCategoryList from "../meals/MealCategoryList";
 
 export default function Home() {
 
-  const [count, setCount] = useState(0);
-
-  const incrementHandle = () => {
-    setCount(count+1);
-  }
-  const decrementHandle = () => {
-    if(count > 0) {
-    setCount(count-1);
-    }
-    
-  }
-
-
-
-
-
+ 
   return (
-    <div className="p-5 space-x-2">
-      <h1 className="font-extrabold">{count}</h1>
-      <Button onClick = {incrementHandle}>increment</Button>
-      <Button onClick = {decrementHandle}>decrement</Button>
+    <div>
 
-      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eaque debitis suscipit numquam culpa libero ratione obcaecati commodi odio tenetur. Nemo, quasi iste nulla odio ad consectetur deserunt perspiciatis quia. Ipsam doloremque ex dolorum animi atque consectetur repudiandae laudantium ratione hic vero. Consequatur illum error natus nihil minima officia omnis tenetur sed, quisquam voluptas earum eligendi, nostrum voluptate labore optio ab in assumenda aut ut necessitatibus? Natus minus repudiandae veniam delectus voluptatum, reiciendis voluptas tempora deleniti? Impedit quam consectetur aperiam earum culpa ipsum repudiandae! Iure consectetur omnis facere dolorum, maiores eveniet ullam corporis, quod reiciendis ad, totam quasi vel commodi.</h1>
-   
-  
+        <div className="grid grid-cols-4 items-center">
+        <img src="https://www.themealdb.com/images/meal-icon.png" alt="" />
+
+        <div className="text-white text-center col-span-2 space-y-3">
+          <h1>Welcome to TheMealDB</h1>
+          <p>Welcome to TheMealDB: An open, crowd-sourced database of recipes from around the world.
+            We offer a free recipe API for anyone wanting to use it, with additional premium features if required.</p>
+        </div>
+
+        <img src="https://www.themealdb.com/images/meal-icon.png" alt="" />
+      </div>
+
+      <div className="flex justify-center mb-9">
+        <form className="max-w-2xl">
+          <Input
+            className="w-96 inline-block bg-white"
+            type="text" placeholder="Search" />
+
+        </form>
+      </div>
+
+
+      <MealCategoryList />
+
+
+
+
+
+
+
+
+
+
+
     </div>
   )
 }
