@@ -15,6 +15,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Formik } from "formik"
+import { useState } from "react"
 
 import * as Yup from "Yup";
 
@@ -28,10 +29,38 @@ const valSchema = Yup.object({
   gender: Yup.string().required(),
   country: Yup.string().required(),
   detail: Yup.string().min(10).max(500).required(),
+  //  image: Yup
+  //   .mixed()
+  //   .test("fileSize", "The file is too large", (value) => value && value.size <= 2 * 1024 * 1024)
+  //   .test('fileType', 'Unsupported file type', (val) => {
+  //     return val && ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/gif'].includes(val.type);
+  //   })
+  //   .required()
+
 
 });
+
+
+
+
+
 export default function AddForm() {
+
+
+  const [data, setData] = useState([]);
+  console.log(data)
+
+
+
+
+
   return (
+
+
+
+
+
+
     <div className="flex justify-center mt-10">
       <Card className="w-full max-w-sm">
         <CardHeader>
@@ -50,10 +79,12 @@ export default function AddForm() {
               gender: '',
               country: '',
               detail: '',
+              // image: '',
+              // imageReview: '',
 
             }}
             onSubmit={(val) => {
-              console.log(val);
+              setData([...data, val]);
 
             }}
 
@@ -165,9 +196,27 @@ export default function AddForm() {
 
 
 
+                  {/* <div className="grid gap-2">
+                    <Label htmlFor="image">Select Image</Label>
+                    <Input
+                      name='image'
+                       onChange={(e) => {
+                        const file = e.target.files[0];
+                        setFieldValue('imageReview', URL.createObjectURL(file));
+                        setFieldValue('image', file);
+                      }}
+                      type="file"
+                     
+                    />
+                       {values.imageReview && !errors.image && <img src={values.imageReview} alt="" className="w-64 h-48" />}
+                    {errors.image && touched.image && <p className="text-red-500">{errors.image}</p>}
+                  </div> */}
+
+
+
 
                 </div>
-                <Button type="submit" className="w-full mt-5">
+                <Button type="submit" className="w-full mt-5 ">
                   Submit
                 </Button>
               </form>
@@ -181,7 +230,18 @@ export default function AddForm() {
 
 
 
-
+          {
+            data.map((d) => {
+              return <div className="mt-5">
+                <h1 className=" font-extrabold mb-2">Your inputed data is Here!</h1>
+                <h1>{d.username}</h1>
+                <h1>{d.email}</h1>
+                <h1>{d.gender}</h1>
+                <h1>{d.country}</h1>
+                <h1>{d.detail}</h1>
+              </div>
+            })
+          }
 
 
 
@@ -190,8 +250,13 @@ export default function AddForm() {
 
 
 
+
+
       </Card>
-      
+
+
+
+
     </div>
   )
 }
