@@ -1,7 +1,10 @@
 import { Input } from "@/components/ui/input";
 import MealCategoryList from "../meals/MealCategoryList";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+
+  const nav = useNavigate();
 
  
   return (
@@ -20,8 +23,12 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center mb-9">
-        <form className="max-w-2xl">
+        <form action={(formData) => {
+          nav(`/search?s=${formData.get('search')}`);
+        }}
+        className="max-w-2xl">
           <Input
+          name = "search"
             className="w-96 inline-block bg-white"
             type="text" placeholder="Search" />
 

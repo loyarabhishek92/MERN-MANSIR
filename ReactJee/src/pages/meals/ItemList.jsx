@@ -1,50 +1,23 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+
 import { useNavigate, useParams } from "react-router"
-import { baseUrl } from "../../lib/constant.js";
+import { useApi } from "@/hooks/apiHook.js";
 
 export default function ItemList() {
 
     const { label } = useParams();
     const nav = useNavigate();
 
-    const [data, setData] = useState();
-    const [load, setLoad] = useState(false);
-    const [err, setErr] = useState();
-
-
-
-    const getData = async () => {
-        try {
-            setLoad(true);
-            const response = await axios.get(`${baseUrl}/filter.php`, {
-                params: {
-                    c: label
-                }
-            });
-            setData(response.data);
-            setLoad(false);
-
-        } catch (err) {
-            setErr(err.message);
-            setLoad(false);
-
-        }
-    }
-
-
-    useEffect(() => {
-        getData();
-
-    }, []);
+   const [data, load, error] = useApi('filter.php', {
+    c: label
+});
 
     if (load) {
-        return <h1>Loading...</h1>
+        return <h1 className="text-white">Loading...</h1>
     }
-    if (err) {
-        return <h1 className="text-red-700">{err}</h1>
+    if (error) {
+        return <h1 className="text-red-700">{error}</h1>
     }
-    console.log(data)
+
 
 
 

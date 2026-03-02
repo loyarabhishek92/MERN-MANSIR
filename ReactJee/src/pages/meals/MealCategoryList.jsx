@@ -1,42 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { baseUrl } from "@/lib/constant";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useApi } from "@/hooks/apiHook";
+
 import { useNavigate } from "react-router";
 
 export default function MealCategoryList() {
 
-    const [data, setData] = useState();
-    const [load, setLoad] = useState(false);
-    const [error, setError] = useState();
-
+   
     const nav = useNavigate();
 
-    const getData = async () => {
-        try {
-            setLoad(true);
-            const response = await axios.get(`${baseUrl}/categories.php`);
-            setData(response.data);
-            setLoad(false);
+    const [data, load, error] = useApi('categories.php');
 
-        } catch (error) {
-
-            setError(error.message);
-            setLoad(false);
-
-        }
-
-    }
-    useEffect(() => {
-        getData();
-    }, []);
+    
 
 
 
 
     if (load){
-        return <h1>Loading...</h1>
+        return <h1 className="text-white">Loading...</h1>
     }
     if (error){
         return <h1>{error}</h1>
