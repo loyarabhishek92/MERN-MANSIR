@@ -1,34 +1,43 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react"
-
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSelector } from "react-redux"
 
 export default function Home() {
-
-  const [count, setCount] = useState(0);
-
-  const incrementHandle = () => {
-    setCount(count+1);
-  }
-  const decrementHandle = () => {
-    if(count > 0) {
-    setCount(count-1);
-    }
-    
-  }
-
-
-
-
-
+  const {users} = useSelector((state) => state.userSlice);
+  console.log(users)
   return (
-    <div className="p-5 space-x-2">
-      <h1 className="font-extrabold">{count}</h1>
-      <Button onClick = {incrementHandle}>increment</Button>
-      <Button onClick = {decrementHandle}>decrement</Button>
+    <div className="px-10 mt-5 grid grid-cols-4 gap-3">
 
-      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eaque debitis suscipit numquam culpa libero ratione obcaecati commodi odio tenetur. Nemo, quasi iste nulla odio ad consectetur deserunt perspiciatis quia. Ipsam doloremque ex dolorum animi atque consectetur repudiandae laudantium ratione hic vero. Consequatur illum error natus nihil minima officia omnis tenetur sed, quisquam voluptas earum eligendi, nostrum voluptate labore optio ab in assumenda aut ut necessitatibus? Natus minus repudiandae veniam delectus voluptatum, reiciendis voluptas tempora deleniti? Impedit quam consectetur aperiam earum culpa ipsum repudiandae! Iure consectetur omnis facere dolorum, maiores eveniet ullam corporis, quod reiciendis ad, totam quasi vel commodi.</h1>
-   
-  
+
+       
+    {
+      users.map((user) => {
+        return <Card key={user.id} size="sm" className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle>{user.username}</CardTitle>
+        <CardDescription>
+          {user.email}
+        </CardDescription>
+        <CardDescription>
+          {user.gender}
+        </CardDescription>
+        <CardDescription>
+          {user.country}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>
+         {user.detail}
+        </p>
+      </CardContent>
+       <CardFooter>
+        <Button variant="default" size="sm" className="w-full">
+          Action
+        </Button>
+      </CardFooter>
+    </Card>
+      })
+    }
     </div>
   )
 }

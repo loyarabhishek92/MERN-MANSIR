@@ -16,8 +16,12 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Textarea } from "@/components/ui/textarea"
 import { Formik } from "formik"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router"
 
 import * as Yup from "Yup";
+import { setUser } from "../userSlice"
+import { nanoid } from "@reduxjs/toolkit"
 
 
 
@@ -47,8 +51,8 @@ const valSchema = Yup.object({
 export default function AddForm() {
 
 
-  const [data, setData] = useState([]);
-  console.log(data)
+ const nav = useNavigate();
+ const dispatch = useDispatch();
 
 
 
@@ -61,8 +65,8 @@ export default function AddForm() {
 
 
 
-    <div className="flex justify-center mt-10">
-      <Card className="w-full max-w-sm">
+    <div className="px-10 mt-5">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Add some</CardTitle>
           <CardDescription>
@@ -83,8 +87,13 @@ export default function AddForm() {
               // imageReview: '',
 
             }}
-            onSubmit={(val) => {
-              setData([...data, val]);
+            onSubmit={(val,{resetForm}) => {
+              dispatch(setUser({
+                ...val,
+                id: nanoid()
+              }));
+              nav(-1);
+              resetForm();
 
             }}
 
@@ -95,7 +104,7 @@ export default function AddForm() {
               return <form
                 onSubmit={handleSubmit}
               >
-                <div className="flex flex-col gap-6">
+                <div className="grid grid-cols-5 gap-3">
 
 
                   <div className="grid gap-2">
@@ -216,9 +225,11 @@ export default function AddForm() {
 
 
                 </div>
-                <Button type="submit" className="w-full mt-5 ">
+                <div className="flex justify-end">
+                <Button type="submit" className=" mt-5 ">
                   Submit
                 </Button>
+                </div>
               </form>
             }}
 
@@ -230,18 +241,7 @@ export default function AddForm() {
 
 
 
-          {
-            data.map((d) => {
-              return <div className="mt-5">
-                <h1 className=" font-extrabold mb-2">Your inputed data is Here!</h1>
-                <h1>{d.username}</h1>
-                <h1>{d.email}</h1>
-                <h1>{d.gender}</h1>
-                <h1>{d.country}</h1>
-                <h1>{d.detail}</h1>
-              </div>
-            })
-          }
+         
 
 
 
