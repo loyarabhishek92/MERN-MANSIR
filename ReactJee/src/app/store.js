@@ -1,11 +1,15 @@
 
-import { bookApi } from "@/pages/books/bookApi";
+import { languageApi } from "@/pages/language/languageApi";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
     reducer: {
-        [bookApi.reducerPath]: bookApi.reducer
+        [languageApi.reducerPath]: languageApi.reducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([bookApi.middleware]),
+
+    middleware: (getDefaultMiddleware) => 
+        getDefaultMiddleware().concat([
+            languageApi.middleware
+        ]),
     
 });
