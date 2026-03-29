@@ -18,5 +18,15 @@
   "bugs": {
     "url": "https://github.com/loyarabhishek92/MERN-MANSIR-1/issues"
   },
-  "homepage": "https://github.com/loyarabhishek92/MERN-MANSIR-1#readme"
+  "homepage": "https://github.com/loyarabhishek92/MERN-MANSIR-1#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-fileupload": "^1.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.2",
+    "morgan": "^1.10.1",
+    "uuid": "^13.0.0"
+  }
 }

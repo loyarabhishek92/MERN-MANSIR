@@ -1,63 +1,45 @@
-// const m = setInterval(() => {
-//     const date = new Date();
-//     console.log(date.getMilliseconds());
-// }, 1000);
+import express from 'express';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import productRoutes from "./routes/productRoutes.js"
+import { dbUrl } from './DB/db.js';
+import fileUpload from 'express-fileupload';
 
-// setTimeout(() => {
-//     clearTimeout(m);
-//     console.log("Hello");
-// }, 5000);
+const app = express();
+const port = 5000;
+
+//database connection
+mongoose.connect(dbUrl).then(() => {
+  app.listen(port, () => {
+  console.log(`Database connected and Server is running on port ${port}`);
+});
+
+}
+
+).catch((err) => {
+  console.log(err);
+})
 
 
 
-// import os from 'os';
-
-// // console.log(os.hostname());
-// const cpus = os.cpus();
-// console.log(`CPU cores: ${cpus.length}`);
-// console.log(`First core model: ${cpus[0].model}`);
 
 
 
 
-import fs from "fs";
+app.use(express.json());   //yo code chaihi body ma data pathauxa kaam garxa yo code na lakhada body ma pathako data show hudaina
+app.use(morgan('dev'));
 
-// for reading content on file
-// fs.readFile('./dummy.txt', 'utf-8', (err, data) => {
-//     console.log(data);
-// });
+app.use(fileUpload({
+  limits: {fileSize: 5*1024*1024},
+}));
 
-// for writing new context on file 
-// fs.writeFile('./dummy.txt', 'Abhishek raj rauniyar', (err) => {
-//     console.log(err);
-// });
 
-// for adding context on existing context 
-// fs.appendFile('./dummy.txt', ' hello jee', (err) => {
-//     console.log(err);
-// });
+app.get('/', (req, res) => {
 
-// for creating folder 
-// fs.mkdir('./upload', (err) => {
-//     console.log(err)
-// });
+  return res.status(200).json({
+    message: "Welcome to the API!",
+  })
+});
 
-// for removing/deleting folder 
-// fs.rmdir('./upload', (err) => {
-//     console.log(err);
-// });
+app.use('/api/products', productRoutes);
 
-// for reading context on file making file sync 
-// const m = fs.readFileSync('./dummy.txt', 'utf-8');
-// console.log(m);
-
-// for checking 'upload' folder is exist or not if not exist then created, if exist then removed 
-// if(fs.existsSync('./uploads')) {
-//     fs.rmdir('./uploads', (err) => {
-//         console.log(err);
-//     });
-// } else {
-//     fs.mkdir('./uploads', (err) => {
-//         console.log(err);
-//     });
-// }
