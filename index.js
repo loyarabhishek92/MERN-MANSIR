@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import productRoutes from "./routes/productRoutes.js"
+import userRouters from "./routes/userRouters.js"
 import { dbUrl } from './DB/db.js';
 import fileUpload from 'express-fileupload';
 
@@ -42,4 +43,5 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/user', userRouters);
 

@@ -1,8 +1,8 @@
 import express from "express";
-import { createProducts, deleteProducts, getProduct, getProducts, updateProducts } from "../controllers/productController.js";
+import { createProducts, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/productController.js";
 import { methodNotAllowed } from "../utils/methodNotAllowed.js";
 import mongoose from "mongoose";
-import { fileCheck } from "../middlewares/fileCheck.js";
+import { fileCheck, updatefileCheck } from "../middlewares/fileCheck.js";
 
 const router = express.Router();
 
@@ -16,6 +16,6 @@ router.param('id', (req, res, next, id) => {
   req.id = id;
   next();
 });
-router.route('/:id').get(getProduct).patch(updateProducts).delete(deleteProducts).all(methodNotAllowed);
+router.route('/:id').get(getProduct).patch(updatefileCheck, updateProduct).delete(deleteProduct).all(methodNotAllowed);
 
 export default router;

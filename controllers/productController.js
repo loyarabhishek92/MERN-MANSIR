@@ -72,30 +72,75 @@ export const createProducts = async (req, res) => {
 
 
 
-export const updateProducts = (req, res) => {
-    return res.status(200).json({
-        message: "your update products",
-    });
+export const updateProduct = async (req, res) => {
+    const { title, description, price, category, brand, stock } = req.body || {};
+
+    try {
+
+        const isExist = await Product.findById(req.id);
+
+        if (!isExist) {
+
+            if (req.imagePath) {
+
+                fs.unlink(`./uploads/${req.imagePath}`, (imageErr) => {
+                    if (imageErr) {
+                        return res.status(400).json({ message: imageErr.message });
+                    }
+                    return res.status(404).json({ message: 'Product Not Found' });
+                });
+            } else {
+                return res.status(404).json({ message: 'Product Not Found' });
+            }
+
+
+
+        }
+        isExist.title = title || isExist.title;
+        isExist.description = description || isExist.description;
+        isExist.price = price || isExist.price;
+        isExist.category = category || isExist.category;
+        isExist.brand = brand || isExist.brand;
+        isExist.stock = stock || isExist.stock;
+
+        if (req.imagePath) {
+            fs.unlink(`./uploads/${isExist.image}`, (imageErr) => {
+                if (imageErr) {
+                    return res.status(400).json({ message: imageErr.message });
+                }
+                isExist.image = req.imagePath;
+                isExist.save();
+                return res.status(200).json({ message: 'Product Updated' });
+            });
+        } else {
+            isExist.save();
+            return res.status(200).json({ message: 'Product Updated' });
+        }
+    } catch (err) {
+
+        return res.status(400).json({ message: err.message });
+
+    }
 }
 
-export const deleteProducts = async (req, res) => {
-     try {
+export const deleteProduct = async (req, res) => {
+    try {
 
-    const isExist = await Product.findById(req.id);
+        const isExist = await Product.findById(req.id);
 
-    if (!isExist) {
-      return res.status(404).json({ message: 'Product Not Found' });
+        if (!isExist) {
+            return res.status(404).json({ message: 'Product Not Found' });
+        }
+
+        fs.unlink(`./uploads/${isExist.image}`, async (imageErr) => {
+            if (imageErr) {
+                return res.status(400).json({ message: imageErr.message });
+            }
+            await isExist.deleteOne();
+            return res.status(200).json({ message: 'Product Deleted' });
+        })
+
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
     }
-
-    fs.unlink(`./uploads/${isExist.image}`, async (imageErr) => {
-      if (imageErr) {
-        return res.status(400).json({ message: imageErr.message });
-      }
-      await isExist.deleteOne();
-      return res.status(200).json({ message: 'Product Deleted' });
-    })
-
-  } catch (err) {
-    return res.status(400).json({ message: err.message });
-  }
 }
