@@ -1,11 +1,17 @@
 
-import { bookApi } from "@/pages/books/bookApi";
+
+import { userSlice } from "@/features/user/userSlice.js";
 import { configureStore } from "@reduxjs/toolkit";
+import { mainApi } from "./mainApi.js";
 
 export const store = configureStore({
     reducer: {
-        [bookApi.reducerPath]: bookApi.reducer
+        [userSlice.name]: userSlice.reducer,
+        [mainApi.reducerPath]: mainApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([bookApi.middleware]),
+    middleware: (getDefaultMiddleware) => 
+        getDefaultMiddleware().concat([
+            mainApi.middleware
+        ]),
     
 });

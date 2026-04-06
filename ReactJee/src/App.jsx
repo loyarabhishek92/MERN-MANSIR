@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router-dom"
-import Home from "./pages/home/Home"
 import NotFound from "./components/NotFound";
 import RootLayout from "./components/RootLayout";
-import AddForm from "./pages/form/add/AddForm";
-import UpdateForm from "./pages/form/update/UpdateForm";
+import Login from "./features/auth/Login.jsx";
+import Register from "./features/auth/Register.jsx";
+import Home from "./features/home/Home.jsx";
 
 
 
@@ -23,12 +23,12 @@ export default function App() {
           element: <Home />
         },
         {
-          path: 'addForm',
-          element: <AddForm />
+          path: 'login',
+          element: <Login />
         },
         {
-          path: 'form/update/:id',
-          element: <UpdateForm />
+          path: 'register',
+          element: <Register />
         },
         {
           path: '*',

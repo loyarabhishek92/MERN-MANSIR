@@ -1,16 +1,18 @@
-import { getUserFromLocal, setUserToLocal } from "@/local/local";
+import { getUserFromLocal, setUserToLocal } from "@/local/local.js";
 import { createSlice } from "@reduxjs/toolkit";
+
+
 
 export const userSlice = createSlice({
     name: 'userSlice',
     initialState: {
-        users: getUserFromLocal()
+        user: getUserFromLocal(),
     },
     reducers: {
         setUser: (state, action) => {
-            state.users.push(action.payload);
-            setUserToLocal(state.users);
-        }
+            state.user = action.payload;
+            setUserToLocal(action.payload);
+        },
     }
 });
 
