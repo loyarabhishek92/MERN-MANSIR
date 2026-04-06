@@ -3,13 +3,14 @@ import fs from "fs";
 
 export const getProducts = async (req, res) => {
     try {
-        const allProducts = await Product.find();
+        const allProducts = await Product.find({}).limit(5).skip(5)
         if (!allProducts || allProducts.length === 0) {
             return res.status(400).json({ message: 'There is no products' })
         }
         // there is product >=1
         return res.status(200).json({
             success: true,
+            totalData: allProducts.length,
             products: allProducts,
         });
 
