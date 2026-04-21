@@ -18,6 +18,9 @@ const loginSchema = Yup.object({
     password: Yup.string().required("Password is required"),
 });
 
+
+
+
 export default function Login() {
 
     const [show, setShow] = useState(false);
@@ -32,7 +35,7 @@ export default function Login() {
 
 
     return (
-        <div>
+        <div className="flex justify-center items-center pt-10">
             <Card className="w-full max-w-sm">
                 <CardHeader>
                     <CardTitle>Login to your account</CardTitle>

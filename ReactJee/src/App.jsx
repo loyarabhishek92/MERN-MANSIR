@@ -5,6 +5,14 @@ import RootLayout from "./components/RootLayout";
 import Login from "./features/auth/Login.jsx";
 import Register from "./features/auth/Register.jsx";
 import Home from "./features/home/Home.jsx";
+import UserProfile from "./features/user/UserProfile.jsx";
+import AdminPage from "./features/admin/AdminPage.jsx";
+import Add from "./features/admin/form/Add.jsx";
+import Edit from "./features/admin/form/Edit.jsx";
+import ProductDetail from "./features/products/ProductDetail.jsx";
+import OrderPage from "./features/order/OrderPage.jsx";
+import CartPage from "./features/carts/CartPage.jsx";
+
 
 
 
@@ -29,6 +37,34 @@ export default function App() {
         {
           path: 'register',
           element: <Register />
+        },
+        {
+          path: 'profile',
+          element: <UserProfile />
+        },
+        {
+          path: "admin",
+          element: <AdminPage />
+        },
+        {
+          path: 'form/add',
+          element: <Add />
+        },
+        {
+          path: 'form/edit/:id',
+          element: <Edit />
+        },
+        {
+          path: 'product/:id',
+          element: <ProductDetail />
+        },
+        {
+          path: 'cart',
+          element: <CartPage />
+        },
+        {
+          path: 'orders',
+          element: <OrderPage />
         },
         {
           path: '*',
