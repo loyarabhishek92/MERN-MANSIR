@@ -1,16 +1,83 @@
-import Product from "../models/Product.js";
+import Product, { brands, categories } from "../models/Product.js";
 import fs from "fs";
+import { removeFile } from "../utils/removeFile.js";
+
+// rating lai convert garna ko lagi {rating: {gt:4}} yesto ma 
+function convertQuery(queryObj) {
+    const mongoQuery = {};
+    for (const key in queryObj) {
+        const match = key.match(/(\w+)\[(\w+)\]/);
+        if (match) {
+            const field = match[1]; //rating
+            const operator = match[2]; //gt 
+            if (!mongoQuery[field]) mongoQuery[field] = {};
+            mongoQuery[field][`$${operator}`] = Number(queryObj[key]);
+        } else {
+            mongoQuery[key] = queryObj[key];
+        }
+    }
+    return mongoQuery;
+}
+
+
+
+
+
+
+
 
 export const getProducts = async (req, res) => {
+    const queryObj = { ...req.query };
+    const excludeFields = ['page', 'sort', 'limit', 'fields', 'search'];
     try {
-        const allProducts = await Product.find();
-        if (!allProducts || allProducts.length === 0) {
+
+        excludeFields.forEach(el => delete queryObj[el]);
+
+        const mongoQuery = convertQuery(queryObj);  //line for rating converting
+        let query = Product.find(mongoQuery);
+
+
+        // search ko lagi 
+        if (req.query.search) {
+            const search = req.query.search;
+            if (categories.some((n) => n.toLowerCase().includes(search.toLowerCase()))) {
+                query.find({ category: { $regex: search, $options: "i" } });
+            } else if (brands.some((n) => n.toLowerCase().includes(search.toLowerCase()))) {
+                query.find({ brand: { $regex: search, $options: "i" } });
+            } else {
+                query.find({ title: { $regex: search, $options: "i" } });
+            }
+        }
+
+
+
+        // sorting ko lagi 
+        if (req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            query = query.sort(sortBy);
+        }
+
+        // field anusar search garnako lagi 
+        if (req.query.fields) {
+            const fields = req.query.fields.split(',').join(' ');
+            query = query.select(fields);
+        }
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const products = await query.skip(skip).limit(limit);
+        const total = await Product.countDocuments({});
+        const pages = Math.ceil(total / limit);
+        if (!products || products.length === 0) {
             return res.status(400).json({ message: 'There is no products' })
         }
         // there is product >=1
         return res.status(200).json({
             success: true,
-            products: allProducts,
+            totalData: products.length,
+            totalpages: pages,
+            products: products,
         });
 
     } catch (err) {
@@ -62,9 +129,8 @@ export const createProducts = async (req, res) => {
         });
 
     } catch (err) {
-        fs.unlink(`./uploads/${req.imagePath}`, (imageErr) => {
-            return res.status(400).json({ message: err.message });
-        });
+        await removeFile(`./uploads/${req.imagePath}`, res);
+        return res.status(400).json({ message: err.message });
     }
 
 }
@@ -79,23 +145,18 @@ export const updateProduct = async (req, res) => {
 
         const isExist = await Product.findById(req.id);
 
+
         if (!isExist) {
-
             if (req.imagePath) {
-
-                fs.unlink(`./uploads/${req.imagePath}`, (imageErr) => {
-                    if (imageErr) {
-                        return res.status(400).json({ message: imageErr.message });
-                    }
-                    return res.status(404).json({ message: 'Product Not Found' });
-                });
+                await removeFile(`./uploads/${req.imagePath}`, res);
+                return res.status(404).json({ message: 'Product Not Found' });
             } else {
                 return res.status(404).json({ message: 'Product Not Found' });
             }
-
-
-
         }
+
+
+
         isExist.title = title || isExist.title;
         isExist.description = description || isExist.description;
         isExist.price = price || isExist.price;
@@ -104,14 +165,15 @@ export const updateProduct = async (req, res) => {
         isExist.stock = stock || isExist.stock;
 
         if (req.imagePath) {
-            fs.unlink(`./uploads/${isExist.image}`, (imageErr) => {
-                if (imageErr) {
-                    return res.status(400).json({ message: imageErr.message });
-                }
-                isExist.image = req.imagePath;
-                isExist.save();
-                return res.status(200).json({ message: 'Product Updated' });
-            });
+            await removeFile(`./uploads/${isExist.image}`, res);
+            // fs.unlink(`./uploads/${isExist.image}`, (imageErr) => {
+            //     if (imageErr) {
+            //         return res.status(400).json({ message: imageErr.message });
+            // }
+            isExist.image = req.imagePath;
+            isExist.save();
+            return res.status(200).json({ message: 'Product Updated' });
+
         } else {
             isExist.save();
             return res.status(200).json({ message: 'Product Updated' });
@@ -132,13 +194,20 @@ export const deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Product Not Found' });
         }
 
-        fs.unlink(`./uploads/${isExist.image}`, async (imageErr) => {
-            if (imageErr) {
-                return res.status(400).json({ message: imageErr.message });
-            }
-            await isExist.deleteOne();
-            return res.status(200).json({ message: 'Product Deleted' });
-        })
+
+        if (isExist.image) {
+            return await removeFile(`./uploads/${isExist.image}`, res);
+        }
+
+        // fs.unlink(`./uploads/${isExist.image}`, async (imageErr) => {
+        //     if (imageErr) {
+        //         return res.status(400).json({ message: imageErr.message });
+        //     }
+
+
+        await isExist.deleteOne();
+        return res.status(200).json({ message: 'Product Deleted' });
+
 
     } catch (err) {
         return res.status(400).json({ message: err.message });

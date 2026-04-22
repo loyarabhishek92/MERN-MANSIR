@@ -1,25 +1,88 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 
-export const userLogin = (req, res) => {
-return res.status(200).json({message: 'Login successfully'});
+export const userLogin = async (req, res) => {
+    const { email, password } = req.body || {};
+    try {
+        const isExist = await User.findOne({ email });
+
+        if (!isExist) {
+            return res.status(404).json({ message: 'User Not Found' });
+        }
+
+        const isMatch = bcrypt.compareSync(password, isExist.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid Password' });
+        }
+        const token = jwt.sign({
+            id: isExist._id,
+            role: isExist.role
+        }, 'secret',
+            // { expiresIn: '1d' }
+        );
+
+        return res.status(200).json({
+            role: isExist.role,
+            token
+        });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
 }
 
 
 export const userRegister = async (req, res) => {
-    const {username, email, password} = req.body || {};
+    const { username, email, password } = req.body || {};
     try {
-        const isExit = await User.findOne({email});
-        if(isExit){
-            return res.status(409).json({message: "user already exist"})
+        const isExit = await User.findOne({ email });
+        if (isExit) {
+            return res.status(409).json({ message: "user already exist" })
         }
         const hashedPassword = bcrypt.hashSync(password, 10);
-        await User.create({username, email, password:hashedPassword});
-        return res.status(200).json({message: 'user created'});
-        
+        await User.create({ username, email, password: hashedPassword });
+        return res.status(200).json({ message: 'user created' });
+
     } catch (err) {
-        return res.status(400).json({message: err.message});
+        return res.status(400).json({ message: err.message });
     }
 
+}
+
+
+
+export const getUser = async (req, res) => {
+    try {
+        const isExist = await User.findById(req.userId).select('-password');
+        if (!isExist) {
+            return res.status(404).json({ message: 'user not found' });
+        }
+        return res.status(200).json(isExist);
+
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+
+    }
+}
+
+
+
+export const updateUser = async (req, res) => {
+    const { username, email } = req.body || {};
+    try {
+        const isExist = await User.findById(req.userId);
+        if (!isExist) {
+            return res.status(404).json({ message: "User Not Found" });
+        }
+        isExist.username = username || isExist.username;
+        isExist.email = email || isExist.email;
+        await isExist.save();
+        return res.status(200).json({ message: "User Updated" })
+
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+
+    }
 }
