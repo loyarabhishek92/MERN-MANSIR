@@ -1,5 +1,4 @@
 import Product, { brands, categories } from "../models/Product.js";
-import fs from "fs";
 import { removeFile } from "../utils/removeFile.js";
 
 // rating lai convert garna ko lagi {rating: {gt:4}} yesto ma 
@@ -42,8 +41,10 @@ export const getProducts = async (req, res) => {
             const search = req.query.search;
             if (categories.some((n) => n.toLowerCase().includes(search.toLowerCase()))) {
                 query.find({ category: { $regex: search, $options: "i" } });
+
             } else if (brands.some((n) => n.toLowerCase().includes(search.toLowerCase()))) {
                 query.find({ brand: { $regex: search, $options: "i" } });
+
             } else {
                 query.find({ title: { $regex: search, $options: "i" } });
             }
@@ -69,30 +70,23 @@ export const getProducts = async (req, res) => {
         const products = await query.skip(skip).limit(limit);
         const total = await Product.countDocuments({});
         const pages = Math.ceil(total / limit);
-        if (!products || products.length === 0) {
-        const allProducts = await Product.find({}).limit(5).skip(5)
-        if (!allProducts || allProducts.length === 0) {
-            return res.status(400).json({ message: 'There is no products' })
-        }
-        // there is product >=1
+
         return res.status(200).json({
             success: true,
-            totalData: products.length,
             totalpages: pages,
-            products: products,
-            totalData: allProducts.length,
-            products: allProducts,
+            products,
         });
 
     } catch (err) {
         return res.status(400).json({
             success: false,
             message: err.message,
-        })
+        });
 
     }
 
 }
+
 
 
 
@@ -170,10 +164,6 @@ export const updateProduct = async (req, res) => {
 
         if (req.imagePath) {
             await removeFile(`./uploads/${isExist.image}`, res);
-            // fs.unlink(`./uploads/${isExist.image}`, (imageErr) => {
-            //     if (imageErr) {
-            //         return res.status(400).json({ message: imageErr.message });
-            // }
             isExist.image = req.imagePath;
             isExist.save();
             return res.status(200).json({ message: 'Product Updated' });
@@ -202,11 +192,6 @@ export const deleteProduct = async (req, res) => {
         if (isExist.image) {
             return await removeFile(`./uploads/${isExist.image}`, res);
         }
-
-        // fs.unlink(`./uploads/${isExist.image}`, async (imageErr) => {
-        //     if (imageErr) {
-        //         return res.status(400).json({ message: imageErr.message });
-        //     }
 
 
         await isExist.deleteOne();
