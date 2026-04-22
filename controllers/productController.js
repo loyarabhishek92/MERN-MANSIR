@@ -70,6 +70,8 @@ export const getProducts = async (req, res) => {
         const total = await Product.countDocuments({});
         const pages = Math.ceil(total / limit);
         if (!products || products.length === 0) {
+        const allProducts = await Product.find({}).limit(5).skip(5)
+        if (!allProducts || allProducts.length === 0) {
             return res.status(400).json({ message: 'There is no products' })
         }
         // there is product >=1
@@ -78,6 +80,8 @@ export const getProducts = async (req, res) => {
             totalData: products.length,
             totalpages: pages,
             products: products,
+            totalData: allProducts.length,
+            products: allProducts,
         });
 
     } catch (err) {

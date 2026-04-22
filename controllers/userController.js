@@ -23,6 +23,7 @@ export const userLogin = async (req, res) => {
         }, 'secret',
             // { expiresIn: '1d' }
         );
+        }, 'secret', { expiresIn: '1d' });
 
         return res.status(200).json({
             role: isExist.role,
