@@ -193,7 +193,7 @@ export const deleteProduct = async (req, res) => {
 
         // delete file safely
         if (isExist.image) {
-            return await removeFile(`./uploads/${isExist.image}`, res);
+            await removeFile(`./uploads/${isExist.image}`);
         }
 
 
