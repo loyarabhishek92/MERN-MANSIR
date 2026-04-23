@@ -15,12 +15,11 @@ export default function AdminPage() {
     if (error) return <h1>{error.data}</h1>
 
 
-
-
-
+console.log(data);
 
     return (
-        <div>
+        <div className="px-10 py-5">
+            <h1 className="text-xl font-bold">TotalData:<h1 className="font-extrabold inline text-2xl text-red-600"> {data.totalData}</h1></h1>
             <div className="flex justify-end">
 
                 <Button
@@ -47,7 +46,7 @@ export default function AdminPage() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {data.products.map(item => (
+                            {data.productsForAdmin.map(item => (
                                 <TableRow key={item._id}>
                                     <TableCell>
                                         <div className='flex items-center gap-3'>

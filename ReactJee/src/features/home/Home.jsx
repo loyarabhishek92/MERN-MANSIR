@@ -5,15 +5,25 @@ import { Skeleton } from "@/components/ui/skeleton.jsx";
 import { Badge } from "@/components/ui/badge.jsx";
 import { base } from "@/app/mainApi.js";
 import SearchProduct from "./SearchProduct.jsx";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button.jsx";
+
 
 
 
 export default function Home() {
+  const nav = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || 1;
+  const search = searchParams.get("search");
   const { data, isLoading, error } = useGetProductsQuery({
     search: searchParams.get("search") ?? '',
+    page
   });
-  const nav = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
 
   // Loading UI
   if (isLoading) {
@@ -39,11 +49,10 @@ export default function Home() {
     );
   }
 
-  console.log(data);
-
+console.log(data);
   return (
     <div className="p-6">
-      <SearchProduct setSearchParams={setSearchParams}/>
+      <SearchProduct setSearchParams={setSearchParams} />
       {/* Header */}
       <h1 className="text-3xl font-bold mb-6">🛍️ Products</h1>
 
@@ -102,6 +111,20 @@ export default function Home() {
           </Card>
         ))}
       </div>
+
+      {(data?.totalPages > 1 && !search) && <div className="flex justify-end mt-5 pl-5 gap-5">
+        <Button
+          disabled={Number(page) === 1}
+          onClick={() => setSearchParams({ page: Number(page) - 1 })}>Prev
+        </Button>
+        <h1>{page}</h1>
+        <Button
+          disabled={Number(page) === data?.totalPages}
+          onClick={() => setSearchParams({ page: Number(page) + 1 })}>Next
+        </Button>
+
+
+      </div>}
     </div>
   );
 }
