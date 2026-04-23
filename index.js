@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import productRoutes from "./routes/productRoutes.js"
-import userRouters from "./routes/userRouters.js"
+import userRoutes from "./routes/userRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import { dbUrl } from './DB/db.js';
 import fileUpload from 'express-fileupload';
@@ -37,7 +37,7 @@ app.use(cors({
 
 
 //database connection
-mongoose.connect(dbUrl).then(() => {
+mongoose.connect(dbUrl).then((val) => {
   app.listen(port, () => {
     console.log(`Database connected and Server is running on port ${port}`);
   });
@@ -51,10 +51,10 @@ app.get('/', (req, res) => {
 
   return res.status(200).json({
     message: "Welcome to the API!",
-  })
+  });
 });
 
 app.use('/api/products', productRoutes);
-app.use('/api/user', userRouters);
+app.use('/api/user', userRoutes);
 app.use('/api/orders', orderRoutes);
 

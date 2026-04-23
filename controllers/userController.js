@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
-export const userLogin = async (req, res) => {
+export const login = async (req, res) => {
     const { email, password } = req.body || {};
     try {
         const isExist = await User.findOne({ email });
@@ -19,7 +19,7 @@ export const userLogin = async (req, res) => {
         }
         const token = jwt.sign({
             id: isExist._id,
-            role: isExist.role
+            role: isExist.role,
         }, 'secret',
             // { expiresIn: '1d' }
         );
@@ -34,7 +34,7 @@ export const userLogin = async (req, res) => {
 }
 
 
-export const userRegister = async (req, res) => {
+export const register = async (req, res) => {
     const { username, email, password } = req.body || {};
     try {
         const isExit = await User.findOne({ email });
@@ -43,7 +43,7 @@ export const userRegister = async (req, res) => {
         }
         const hashedPassword = bcrypt.hashSync(password, 10);
         await User.create({ username, email, password: hashedPassword });
-        return res.status(200).json({ message: 'user created' });
+        return res.status(201).json({ message: 'user created' });
 
     } catch (err) {
         return res.status(400).json({ message: err.message });

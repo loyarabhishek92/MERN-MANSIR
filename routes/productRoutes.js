@@ -1,5 +1,5 @@
 import express from "express";
-import { createProducts, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/productController.js";
+import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/productController.js";
 import { methodNotAllowed } from "../utils/methodNotAllowed.js";
 import mongoose from "mongoose";
 import { fileCheck, updatefileCheck } from "../middlewares/fileCheck.js";
@@ -7,7 +7,7 @@ import { adminCheck, userCheck } from "../middlewares/userCheck.js";
 
 const router = express.Router();
 
-router.route('/').get(getProducts).post(userCheck, adminCheck, fileCheck, createProducts).all(methodNotAllowed);
+router.route('/').get(getProducts).post(userCheck, adminCheck, fileCheck, createProduct).all(methodNotAllowed);
 
 router.param('id', (req, res, next, id) => {
 
