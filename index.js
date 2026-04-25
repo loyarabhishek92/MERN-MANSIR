@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import productRoutes from "./routes/productRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
-import { dbUrl } from './DB/db.js';
 import fileUpload from 'express-fileupload';
 import cors from "cors";
 import {rateLimit} from "express-rate-limit";
@@ -37,7 +36,7 @@ app.use(cors({
 
 
 //database connection
-mongoose.connect(dbUrl).then((val) => {
+mongoose.connect('mongodb+srv://AbhishekDB:abhishek400@cluster0.dolws2z.mongodb.net/Shopping').then((val) => {
   app.listen(port, () => {
     console.log(`Database connected and Server is running on port ${port}`);
   });
