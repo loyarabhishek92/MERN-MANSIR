@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
-
+//
   // Loading UI
   if (isLoading) {
     return (
