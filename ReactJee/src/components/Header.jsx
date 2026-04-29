@@ -12,12 +12,12 @@ export default function Header() {
 
   return (
     <div className="flex justify-between p-5 bg-blue-100">
-      <Button><NavLink to={'/'}>Go to Home</NavLink></Button>
+      <NavLink to={'/'} className={"px-3 py-1 bg-blue-200 rounded-l-2xl hover:text-yellow-100"}>Go to Home</NavLink>
       <h1>frontend backend working</h1>
 
-      {user ? <DropdownMenuUser user={user} /> : <div className="flex gap-5">
-        <Button><NavLink to={'/login'}>Login</NavLink></Button>
-        <Button className={'bg-blue-700'}><NavLink to={'/register'}>Register</NavLink></Button>
+      {user ? <DropdownMenuUser user={user} /> : <div className="flex gap-10">
+        <NavLink to={'/login'} className={"px-3 py-1 bg-white rounded-2xl"}>Login</NavLink>
+        <NavLink to={'/register'} className={"px-3 py-1 bg-blue-500 rounded-2xl"}>Register</NavLink>
       </div>
       }
 

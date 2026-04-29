@@ -8,11 +8,11 @@ import { Spinner } from "@/components/ui/spinner.jsx";
 
 export default function RemoveProduct({ id }) {
     const { user } = useSelector(state => state.userSlice);
-    const [removeProduct, { isLoading }] = useRemoveProductMutation();
+    const [deleteProduct, { isLoading }] = useRemoveProductMutation();
 
     const handleRemove = async () => {
         try {
-            await removeProduct({id, token: user.token}).unwrap();
+            await deleteProduct({id, token: user.token}).unwrap();
             toast.success("Product delete successfully");
         } catch (err) {
             toast.error(err.data.message);

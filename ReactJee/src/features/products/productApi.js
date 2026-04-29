@@ -27,7 +27,7 @@ export const productApi = mainApi.injectEndpoints({
                 method: "POST",
                 body: q.body,
                 headers: {
-                    Authorization: q.token,
+                    authorization: q.token,
                 }
             }),
             invalidatesTags: ["Product"],
@@ -39,7 +39,7 @@ export const productApi = mainApi.injectEndpoints({
                 method: "PATCH",
                 body: q.body,
                 headers: {
-                    Authorization: q.token,
+                    authorization: q.token,
                 }
             }),
             invalidatesTags: ["Product"],
@@ -50,7 +50,7 @@ export const productApi = mainApi.injectEndpoints({
                 url: `/products/${q.id}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: q.token
+                    authorization: q.token
                 }
             }),
             invalidatesTags: ["Product"],
