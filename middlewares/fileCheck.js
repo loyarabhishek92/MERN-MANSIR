@@ -56,8 +56,5 @@ export const updatefileCheck = (req, res, next) => {
     }
   });
 
-
-
-
 }
 
