@@ -256,6 +256,7 @@ export default function Add() {
 
                                     />
                                     {values.imageReview && !errors.image && <img src={values.imageReview} alt={values.fullname} />}
+                                    
                                     {errors.image && touched.image && <p className="text-destructive">{errors.image}</p>}
                                 </div>
 

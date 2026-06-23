@@ -5,7 +5,7 @@ export const setUserToLocal = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
 }
 
-export const getUserFromLocal = () => {
+export const getUserFromLocal = (user) => {
     const user = localStorage.getItem('user');
     return user === null ? null : JSON.parse(user);
 }
